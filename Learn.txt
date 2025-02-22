@@ -1,0 +1,69 @@
+Hello this is my tutorial for deno:
+
+Learning this new backend language will be hard since there is no known courses so i will have to follow my heart and read the documentations and watch small videos on how to integrate certain things and build everything
+
+in a similar fashion to it's ancestor node.js most of the work is handled in a modular way and folders and get all together in one file which in this case is called server.ts
+
+we start by intializing our req and res by using the following code: async function handler(req:Request): Promise<Response>{const url = new URL(req.url) //getting the api url
+    const path = url.pathname //getting url pathname
+}
+
+we can say that this function will handle all of our routes like the following:
+if(req.method === 'GET' && path ==='/'){
+        return new Response('hello world')       
+}
+
+so inside this handler function it will handle all of our routes and we can use the controllers inside of it
+
+
+to intialize a deno http server we use the following command:
+Deno.serve({port:PORT},handler)
+
+the normal run command:deno run --allow-env-read --allow-net --allow-sys --env --watch server.ts
+
+the new run command that does the same thing but is newer : deno -ERNS --env --watch server.ts
+
+
+now we will learn how to implement mongodb inside deno.
+
+we start by creating a new db.ts folder to handle the database
+
+we import the Mongoclient and here we learn that deno doesn't use the idea of normal package.json no it uses the idea of importing directly from the source
+
+if we get an error inside the improt from npm i think the solution is just calling the deno install command
+
+deno has access to it's enviroment variables using: Deno.env
+
+to exit deno if an error happens this is the code :Deno.exit(1);
+
+i used npm here only because prettier is my main formatter i can't stand programming without adding a semi colon in the end of every line (maybe i need to go to therapy)
+
+we intialize the new database using this code : const client = new MongoClient(MONGODB_URL);
+
+
+we now connect to the data base using the following lines:
+  await client.connect();
+  await client.db('admin').command({ ping: 1 });
+ping is used to make sure we can ping and connect to the database
+
+what is so good in deno is that we have access to a lot of things in the database even more than node.js look for example at how we can get the collection :
+
+const db = client.db(DB_NAME);
+const todos = db.collection('todos');
+
+now this todos variable will be a direct reference to the todos whole collection
+
+now let's get to the functions/controller part:
+
+
+all of our functions will have this body :
+async function function_name(req:Request): Promise<Response> {
+        const body = await req.json();
+}
+this body gives us access to the request as req and give us access to give response and now our req.body is called body
+
+now let's focus on our REST functions
+
+the add:     const result = await todos.insertOne(body);
+
+we are adding a new instance to our todo collection called result
