@@ -1,5 +1,4 @@
 import { MongoClient } from 'npm:mongodb@5.6.0';
-
 const dbPassword = Deno.env.get('MONGODB_URL_PASSWORD') || '';
 
 const MONGODB_URL = Deno.env.get('MONGODB_URL') || '';
@@ -23,7 +22,5 @@ try {
   console.error('DB connection failed', error);
   Deno.exit(1);
 }
-const db = client.db(DB_NAME);
-const todos = db.collection('todos');
-
-export { db, todos };
+export const db = client.db(DB_NAME);
+export const todosCollection = db.collection('todos');

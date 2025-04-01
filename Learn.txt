@@ -67,3 +67,23 @@ now let's focus on our REST functions
 the add:     const result = await todos.insertOne(body);
 
 we are adding a new instance to our todo collection called result
+
+==========================================================================
+
+I didn't write for a while for one reason i have been confused between what to use and what system i should follow and most of the confusion started at the idea of the Oak middleware which can be reduced to being called express in node.js.
+
+Learning about all the things of Oak and how to make it work with native deno but it was worth the knowledge and the time.
+
+So Oak essentially is like express in the idea of Router but it gets a little bit complicated since Oak doesn't work with the native deno request body so we need to adjust the request body and turn it into JSON so that we can handle it
+
+I searched it and found no one actually did this and that was because Oak for some reason decided that the function that does this is no longer needed and they removed it
+
+anyway i won't really explain how it handles the req.body you can already enter it and find all the documentation and comments inside it but anyway i will say one thing it's a little bit complicated since i need to make sure to handle request query also and handle certain requests
+
+Now the point i'm at right now is that i'm going back a little bit to the root of deno which is TypeScript and try to refactor my code into OOP through classes and keeping every variable into it's type
+
+I will achieve the last part using a validation library (like Joi in node) called Zod and will use another one of the OOP known methods/classes which is interface 
+
+since i stopped for a while and while probably take a little bit of a break to work on some projects and other planned works i want to document something important and that is i disabled the deno extension since it caused a lot of problems with other typescript projects
+        
+        -the solution after disabling the deno extension is that i will detect the files automtically through the pressence of the deno.json file it will automtically identify a deno project
